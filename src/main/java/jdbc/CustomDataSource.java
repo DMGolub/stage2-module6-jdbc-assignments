@@ -2,10 +2,9 @@ package jdbc;
 
 import javax.sql.DataSource;
 
+import jdbc.exceptions.CustomDataSourceException;
 import lombok.Getter;
 import lombok.Setter;
-import lombok.Synchronized;
-import lombok.Value;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -13,7 +12,6 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.SQLFeatureNotSupportedException;
 import java.util.Properties;
-import java.util.PropertyResourceBundle;
 import java.util.logging.Logger;
 
 @Getter
@@ -53,7 +51,7 @@ public class CustomDataSource implements DataSource {
                             properties.getProperty("postgres.name")
                         );
                     } catch (IOException e) {
-                        throw new RuntimeException(e);
+                        throw new CustomDataSourceException(e);
                     }
                 }
             }
