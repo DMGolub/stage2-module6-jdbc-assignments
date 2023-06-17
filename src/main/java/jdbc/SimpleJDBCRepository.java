@@ -111,6 +111,7 @@ public class SimpleJDBCRepository {
             ps.setString(1, user.getFirstName());
             ps.setString(2, user.getLastName());
             ps.setInt(3, user.getAge());
+            ps.setLong(4, user.getId());
             ps.executeUpdate();
         } catch (SQLException e) {
             throw new SimpleJDBCRepositoryException(e);
