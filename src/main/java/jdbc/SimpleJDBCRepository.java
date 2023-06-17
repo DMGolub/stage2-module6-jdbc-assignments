@@ -21,10 +21,6 @@ import java.util.List;
 @NoArgsConstructor
 public class SimpleJDBCRepository {
 
-    private Connection connection = null;
-    private PreparedStatement ps = null;
-    private Statement st = null;
-
     private static final String CREATE_USER = "INSERT INTO myusers (firstname, lastname, age) " +
         "VALUES (?, ?, ?)";
     private static final String UPDATE_USER = "UPDATE myusers SET firstname = ?, lastname = ?, " +
@@ -136,7 +132,7 @@ public class SimpleJDBCRepository {
             ps.setInt(3, user.getAge());
             ps.executeUpdate();
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            throw new SimpleJDBCRepositoryException(e);
         }
         return findUserById(user.getId());
     }
